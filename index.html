@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siêu Máy Tính AI ( Người Lập Trình: Hon )</title>
+    <title>Siêu Máy Tính AI (Người Lập Trình: Hon)</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -72,18 +72,6 @@
         .send-button:hover {
             background-color: #6c757d;
         }
-        #chatArea {
-            margin-top: 20px;
-            max-height: 300px;
-            overflow-y: auto;
-            padding: 10px;
-            background-color: #222;
-            border-radius: 5px;
-        }
-        #chatArea div {
-            margin: 5px 0;
-            text-align: left;
-        }
         @media (max-width: 600px) {
             .button {
                 font-size: 10px; 
@@ -110,10 +98,11 @@
     <h1>Siêu Máy Tính AI</h1>
     <h2>Công Nghệ AI Xịn Xò Nhất</h2>
     <div class="toolbar">
+        <a href="https://chatgpt.com/" class="button">ChatGPT</a>
         <a href="https://baomoi.com/" class="button">Báo Mới</a>
         <a href="https://www.binance.com/vi/markets/overview" class="button">Binance</a>
         <a href="https://www.pnj.com.vn/blog/gia-vang/" class="button">Giá Vàng</a>
-        <a href="https://www.google.com/search?q=gi%C3%A1+%C4%91%C3%B4&rlz=1C1RXQR_enVN1134VN1134&oq=&gs_lcrp=EgZjaHJvbWUqCQgBEEUYOxjCAzIJCAAQRRg7GMIDMgkIARBFGDsYwgMyCQgCEEUYOxjCAzIJCAMQRRg7GMIDMgkIBBBFGDsYwgMyEQgFEAAYAxhCGI8BGLQCGOoCMhEIBhAAGAMYQhiPARi0AhjqAjIRCAcQABgDGEIYjwEYtAIY6gLSAQk4Mzg3OWowajeoAgiwAgE&sourceid=chrome&ie=UTF-8" class="button">Giá USD</a>
+        <a href="https://www.google.com/search?q=giá+đô" class="button">Giá USD</a>
         <a href="https://game.chronodivide.com/" class="button">Game</a>
         <a href="https://www.youtube.com/" class="button">Youtube</a>
         <a href="https://shopee.vn/" class="button">Shopee</a>
@@ -122,16 +111,14 @@
         <a href="https://www.tiktok.com/" class="button">TikTok</a>
         <a href="https://ohaytv.my/" class="button">Xem Phim</a>
         <a href="https://animevietsub.cx/" class="button">Anime</a>
+        <a href="https://www.google.com/search?q=dịch" class="button">Dịch</a>
     </div>
 
     <div id="ipAddress">Đang lấy địa chỉ IP...</div>
 
     <div class="input-container">
-        <input type="text" id="userInput" class="input-field" placeholder="Nhập biểu thức toán học của bạn..." onkeypress="handleKeyPress(event)">
-        <button class="send-button" onclick="sendInput()">Giải</button>
+        <input type="text" id="userInput" class="input-field" placeholder="Nhập từ khóa tìm kiếm..." onkeypress="handleKeyPress(event)">
     </div>
-
-    <div id="chatArea"></div> <!-- Khu vực hiển thị kết quả -->
 
     <script>
         async function fetchIP() {
@@ -146,37 +133,18 @@
 
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
-                sendInput();
+                searchGoogle();
             }
         }
 
-        function sendInput() {
+        function searchGoogle() {
             const userInput = document.getElementById('userInput').value;
             if (userInput.trim() !== '') {
-                const result = calculate(userInput);
-                updateChatArea(userInput, result);
-                document.getElementById('userInput').value = '';
+                const query = encodeURIComponent(userInput);
+                window.open(`https://www.google.com/search?q=${query}`, '_blank');
             } else {
-                alert('Vui lòng nhập biểu thức toán học!');
+                alert('Vui lòng nhập từ khóa tìm kiếm!');
             }
-        }
-
-        function calculate(expression) {
-            try {
-                const result = eval(expression);
-                return result;
-            } catch (error) {
-                return 'Có lỗi xảy ra trong tính toán!';
-            }
-        }
-
-        function updateChatArea(expression, result) {
-            const chatArea = document.getElementById('chatArea');
-            chatArea.innerHTML = ''; // Xóa nội dung cũ
-            const messageElement = document.createElement('div');
-            messageElement.innerHTML = `<strong>Biểu thức:</strong> ${expression} <br> <strong>Kết quả:</strong> ${result}`;
-            chatArea.appendChild(messageElement);
-            chatArea.scrollTop = chatArea.scrollHeight; // Cuộn xuống tin nhắn mới
         }
 
         fetchIP();

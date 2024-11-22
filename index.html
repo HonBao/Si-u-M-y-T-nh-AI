@@ -23,9 +23,9 @@
             padding: 10px 0;
         }
         .button {
-            font-size: 12px; /* Giảm kích thước nút */
-            padding: 5px 8px; /* Giảm kích thước padding */
-            margin: 3px; /* Giảm khoảng cách giữa các nút */
+            font-size: 12px; 
+            padding: 5px 8px; 
+            margin: 3px; 
             border: 1px solid #ff8c00; 
             border-radius: 5px;
             background-color: #495057; 
@@ -43,19 +43,64 @@
             right: 10px;
             background-color: rgba(255, 140, 0, 0.8);
             color: black;
-            padding: 3px 6px; /* Giảm kích thước padding */
+            padding: 3px 6px; 
             border-radius: 5px;
-            font-size: 10px; /* Giảm kích thước font */
+            font-size: 10px; 
+        }
+        .input-container {
+            margin-top: 20px;
+        }
+        .input-field {
+            width: 80%;
+            padding: 8px;
+            border: 1px solid #ff8c00;
+            border-radius: 5px;
+            background-color: #495057;
+            color: #ff8c00;
+            font-size: 12px;
+        }
+        .send-button {
+            padding: 8px 12px;
+            margin-left: 5px;
+            border: 1px solid #ff8c00; 
+            border-radius: 5px;
+            background-color: #495057;
+            color: #ff8c00;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .send-button:hover {
+            background-color: #6c757d;
+        }
+        #chatArea {
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 5px;
+        }
+        #chatArea div {
+            margin: 5px 0;
+            text-align: left;
         }
         @media (max-width: 600px) {
             .button {
-                font-size: 10px; /* Kích thước nút nhỏ hơn trên di động */
-                padding: 4px 6px; /* Padding nhỏ hơn trên di động */
-                width: auto; /* Đặt lại width tự động */
+                font-size: 10px; 
+                padding: 4px 6px; 
+                width: auto; 
             }
             #ipAddress {
-                font-size: 8px; /* Kích thước font nhỏ hơn cho IP */
-                padding: 2px 4px; /* Padding nhỏ hơn cho IP */
+                font-size: 8px; 
+                padding: 2px 4px; 
+            }
+            .input-field {
+                font-size: 10px; 
+                padding: 6px;
+            }
+            .send-button {
+                font-size: 10px;
+                padding: 6px 10px;
             }
         }
     </style>
@@ -67,17 +112,26 @@
     <div class="toolbar">
         <a href="https://baomoi.com/" class="button">Báo Mới</a>
         <a href="https://www.binance.com/vi/markets/overview" class="button">Binance</a>
-        <a href="https://www.pnj.com.vn/blog/gia-vang/?srsltid=AfmBOoqbZMLIdiKz8nm5nH7rfshTvLmefpEdzFwuKcuYeUUK8Ur2_mV0&r=1731941968539" class="button">Giá Vàng</a>
-        <a href="https://www.google.com/search?q=t%E1%BB%B7+gi%C3%A1+usd&rlz=1C1RXQR_enVN1134VN1134" class="button">Giá USD</a>
+        <a href="https://www.pnj.com.vn/blog/gia-vang/" class="button">Giá Vàng</a>
+        <a href="https://www.google.com/search?q=gi%C3%A1+%C4%91%C3%B4&rlz=1C1RXQR_enVN1134VN1134&oq=&gs_lcrp=EgZjaHJvbWUqCQgBEEUYOxjCAzIJCAAQRRg7GMIDMgkIARBFGDsYwgMyCQgCEEUYOxjCAzIJCAMQRRg7GMIDMgkIBBBFGDsYwgMyEQgFEAAYAxhCGI8BGLQCGOoCMhEIBhAAGAMYQhiPARi0AhjqAjIRCAcQABgDGEIYjwEYtAIY6gLSAQk4Mzg3OWowajeoAgiwAgE&sourceid=chrome&ie=UTF-8" class="button">Giá USD</a>
         <a href="https://game.chronodivide.com/" class="button">Game</a>
-        <a href="https://www.youtube.com/?themeRefresh=1" class="button">Youtube</a>
+        <a href="https://www.youtube.com/" class="button">Youtube</a>
         <a href="https://shopee.vn/" class="button">Shopee</a>
         <a href="https://www.lazada.vn/" class="button">Lazada</a>
         <a href="https://www.facebook.com/" class="button">Facebook</a>
         <a href="https://www.tiktok.com/" class="button">TikTok</a>
+        <a href="https://ohaytv.my/" class="button">Xem Phim</a>
+        <a href="https://animevietsub.cx/" class="button">Anime</a>
     </div>
 
     <div id="ipAddress">Đang lấy địa chỉ IP...</div>
+
+    <div class="input-container">
+        <input type="text" id="userInput" class="input-field" placeholder="Nhập biểu thức toán học của bạn..." onkeypress="handleKeyPress(event)">
+        <button class="send-button" onclick="sendInput()">Giải</button>
+    </div>
+
+    <div id="chatArea"></div> <!-- Khu vực hiển thị kết quả -->
 
     <script>
         async function fetchIP() {
@@ -89,7 +143,42 @@
                 document.getElementById('ipAddress').innerText = 'Không thể lấy địa chỉ IP';
             }
         }
-        
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendInput();
+            }
+        }
+
+        function sendInput() {
+            const userInput = document.getElementById('userInput').value;
+            if (userInput.trim() !== '') {
+                const result = calculate(userInput);
+                updateChatArea(userInput, result);
+                document.getElementById('userInput').value = '';
+            } else {
+                alert('Vui lòng nhập biểu thức toán học!');
+            }
+        }
+
+        function calculate(expression) {
+            try {
+                const result = eval(expression);
+                return result;
+            } catch (error) {
+                return 'Có lỗi xảy ra trong tính toán!';
+            }
+        }
+
+        function updateChatArea(expression, result) {
+            const chatArea = document.getElementById('chatArea');
+            chatArea.innerHTML = ''; // Xóa nội dung cũ
+            const messageElement = document.createElement('div');
+            messageElement.innerHTML = `<strong>Biểu thức:</strong> ${expression} <br> <strong>Kết quả:</strong> ${result}`;
+            chatArea.appendChild(messageElement);
+            chatArea.scrollTop = chatArea.scrollHeight; // Cuộn xuống tin nhắn mới
+        }
+
         fetchIP();
     </script>
 </body>

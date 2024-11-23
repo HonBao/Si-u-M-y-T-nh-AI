@@ -43,9 +43,9 @@
             right: 10px;
             background-color: rgba(255, 140, 0, 0.8);
             color: black;
-            padding: 3px 6px; 
+            padding: 2px 4px;  
             border-radius: 5px;
-            font-size: 10px; 
+            font-size: 8px;  
         }
         .input-container {
             margin-top: 20px;
@@ -60,9 +60,9 @@
             font-size: 12px;
         }
         .ad-container {
-            margin: 20px 0; /* Khoảng cách trên và dưới */
-            font-size: 18px; /* Kích thước chữ */
-            color: #FFD700; /* Màu chữ */
+            margin: 20px 0; 
+            font-size: 18px; 
+            color: #FFD700; 
         }
         .ad-links {
             margin-top: 20px;
@@ -123,6 +123,15 @@
         .chat-button:hover {
             transform: translateY(-5px);
         }
+        #visitorCount {
+            margin-top: 20px;
+            font-size: 14px; /* Kích thước chữ nhỏ hơn */
+            color: purple; /* Màu tím */
+            position: absolute; /* Đặt ở cuối trang */
+            bottom: 10px; /* Cách đáy trang */
+            left: 50%; /* Căn giữa */
+            transform: translateX(-50%); /* Căn giữa */
+        }
         @media (max-width: 600px) {
             .button {
                 font-size: 10px; 
@@ -130,7 +139,7 @@
                 width: auto; 
             }
             #ipAddress {
-                font-size: 8px; 
+                font-size: 7px;  
                 padding: 2px 4px; 
             }
             .input-field {
@@ -142,12 +151,15 @@
                 height: 60px;
             }
             .logo-text {
-                font-size: 10px; /* Kích thước chữ logo cho mobile */
-                line-height: 1.2; /* Đảm bảo khoảng cách giữa các dòng */
+                font-size: 10px; 
+                line-height: 1.2; 
             }
             .chat-button {
                 padding: 10px 16px;
                 font-size: 12px;
+            }
+            #visitorCount {
+                font-size: 12px; /* Kích thước chữ nhỏ hơn trên mobile */
             }
         }
     </style>
@@ -201,6 +213,9 @@
         Chat
     </a>
 
+    <!-- Số Người Truy Cập -->
+    <div id="visitorCount">Số Người Truy Cập Trang: <span id="count">1.000.000</span></div>
+
     <script>
         async function fetchIP() {
             try {
@@ -234,7 +249,17 @@
             window.open(`${url}?text=${encodeURIComponent(message)}`, '_blank');
         }
 
+        // Cập nhật số người truy cập
+        let currentCount = 1000000;
+
+        function updateVisitorCount() {
+            const change = Math.floor(Math.random() * 10) - 5; // Thay đổi từ -5 đến 4
+            currentCount += change;
+            document.getElementById('count').innerText = currentCount.toLocaleString();
+        }
+
         fetchIP();
+        setInterval(updateVisitorCount, 1000); // Cập nhật mỗi giây
     </script>
 </body>
 </html>

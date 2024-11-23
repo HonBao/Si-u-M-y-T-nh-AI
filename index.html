@@ -59,18 +59,64 @@
             color: #ff8c00;
             font-size: 12px;
         }
-        .send-button {
-            padding: 8px 12px;
-            margin-left: 5px;
-            border: 1px solid #ff8c00; 
-            border-radius: 5px;
-            background-color: #495057;
-            color: #ff8c00;
-            cursor: pointer;
-            font-size: 12px;
+        .ad-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
         }
-        .send-button:hover {
-            background-color: #6c757d;
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            text-decoration: none; 
+            transition: transform 0.3s; 
+        }
+        .logo:hover {
+            transform: translateY(-5px); 
+        }
+        .youtube {
+            background: red; 
+            color: white; 
+        }
+        .tiktok {
+            background: black; 
+            color: white; 
+        }
+        .facebook {
+            background: #1877F2; 
+            color: white; 
+        }
+        .logo-text {
+            font-size: 16px; 
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.2; 
+        }
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            background: linear-gradient(to bottom right, #0084FF, #00C6FF);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        .chat-button:hover {
+            transform: translateY(-5px);
         }
         @media (max-width: 600px) {
             .button {
@@ -86,9 +132,14 @@
                 font-size: 10px; 
                 padding: 6px;
             }
-            .send-button {
-                font-size: 10px;
-                padding: 6px 10px;
+            .logo {
+                width: 60px; 
+                height: 60px;
+                font-size: 14px; 
+            }
+            .chat-button {
+                padding: 10px 16px;
+                font-size: 12px;
             }
         }
     </style>
@@ -104,7 +155,6 @@
         <a href="https://www.pnj.com.vn/blog/gia-vang/" class="button">Giá Vàng</a>
         <a href="https://www.google.com/search?q=giá+đô" class="button">Giá USD</a>
         <a href="https://gamevui.vn/" class="button">Game</a>
-        <a href="https://www.youtube.com/" class="button">Youtube</a>
         <a href="https://shopee.vn/" class="button">Shopee</a>
         <a href="https://www.lazada.vn/" class="button">Lazada</a>
         <a href="https://www.facebook.com/" class="button">Facebook</a>
@@ -125,6 +175,23 @@
     <div class="input-container">
         <input type="text" id="userInput" class="input-field" placeholder="Nhập từ khóa tìm kiếm..." onkeypress="handleKeyPress(event)">
     </div>
+
+    <div class="ad-links">
+        <a href="https://www.youtube.com/@YTB_HON_CHANNEL" class="logo youtube">
+            <div class="logo-text">YouTube</div>
+        </a>
+        <a href="https://www.tiktok.com/@31271860505vinh?_t=8rdXgxpXA4W&_r=1" class="logo tiktok">
+            <div class="logo-text">TikTok</div>
+        </a>
+        <a href="https://www.facebook.com/gaara.shi/" class="logo facebook">
+            <div class="logo-text">Facebook</div>
+        </a>
+    </div>
+
+    <!-- Nút Chat -->
+    <a href="#" class="chat-button" onclick="openMessenger()">
+        Chat
+    </a>
 
     <script>
         async function fetchIP() {
@@ -151,6 +218,12 @@
             } else {
                 alert('Vui lòng nhập từ khóa tìm kiếm!');
             }
+        }
+
+        function openMessenger() {
+            const url = 'https://m.me/your_facebook_username'; // Thay thế bằng tên người dùng Facebook của bạn
+            const message = 'Shop Xin Chào Bạn\nBạn Muốn Mua Sản Phẩm Nào Ạ';
+            window.open(`${url}?text=${encodeURIComponent(message)}`, '_blank');
         }
 
         fetchIP();

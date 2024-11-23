@@ -209,8 +209,8 @@
     </div>
 
     <!-- Nút Chat -->
-    <a href="#" class="chat-button" onclick="openMessenger()">
-        Chat
+    <a href="https://m.me/your_facebook_username" class="chat-button" target="_blank">
+        Chat với chúng tôi
     </a>
 
     <!-- Số Người Truy Cập -->
@@ -241,12 +241,6 @@
             } else {
                 alert('Vui lòng nhập từ khóa tìm kiếm!');
             }
-        }
-
-        function openMessenger() {
-            const url = 'https://m.me/your_facebook_username'; // Thay thế bằng tên người dùng Facebook của bạn
-            const message = 'Shop Xin Chào Bạn\nBạn Muốn Mua Sản Phẩm Nào Ạ';
-            window.open(`${url}?text=${encodeURIComponent(message)}`, '_blank');
         }
 
         // Cập nhật số người truy cập

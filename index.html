@@ -132,6 +132,41 @@
             left: 50%; /* Căn giữa */
             transform: translateX(-50%); /* Căn giữa */
         }
+        /* Popup style */
+        .popup {
+            display: none; /* Ẩn popup mặc định */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: black; /* Màu nền đen */
+            color: white; /* Màu chữ trắng */
+            border: 1px solid #ff8c00;
+            border-radius: 10px;
+            padding: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .popup h3 {
+            margin: 0 0 10px;
+        }
+        .popup a {
+            color: #ff0000; /* Màu đỏ tươi cho liên kết */
+            text-decoration: none; /* Bỏ gạch chân */
+        }
+        .popup a:hover {
+            text-decoration: underline; /* Gạch chân khi hover */
+        }
+        .close-button {
+            display: block;
+            margin: 10px auto 0;
+            padding: 5px 10px;
+            background-color: #ff8c00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
         @media (max-width: 600px) {
             .button {
                 font-size: 10px; 
@@ -174,7 +209,7 @@
         <a href="https://www.binance.com/vi/markets/overview" class="button">Binance</a>
         <a href="https://www.pnj.com.vn/blog/gia-vang/" class="button">Giá Vàng</a>
         <a href="https://www.google.com/search?q=giá+đô" class="button">Giá USD</a>
-        <a href="https://gamevui.vn/" class="button">Game</a>
+        <a href="javascript:void(0);" class="button" onclick="showGameLinks()">Game</a>
         <a href="https://shopee.vn/" class="button">Shopee</a>
         <a href="https://www.lazada.vn/" class="button">Lazada</a>
         <a href="https://www.facebook.com/" class="button">Facebook</a>
@@ -216,6 +251,19 @@
     <!-- Số Người Truy Cập -->
     <div id="visitorCount">Số Người Truy Cập Trang: <span id="count">1.000.000</span></div>
 
+    <!-- Popup cho Game Links -->
+    <div id="gamePopup" class="popup">
+        <h3>Liên Kết Game</h3>
+        <ul>
+            <li><a href="https://game.chronodivide.com/" target="_blank">Red Alert 2</a></li>
+            <li><a href="https://gamevui.vn/" target="_blank">Game Vui</a></li>
+            <li><a href="https://vltkh5.zing.vn/" target="_blank">Võ Lâm Truyền Kỳ H5</a></li>
+            <li><a href="https://tienkiem.cmn.vn/landing-page-01?utm_code=200&gad_source=1&gclid=CjwKCAiAl4a6BhBqEiwAqvrqupg_6ijkafzkhY6mcO0iYGkA6dvIIbCQmFxywa5D1oss-ICYHZRX6hoCQzMQAvD_BwE" target="_blank">Tiên Kiếm</a></li>
+            <!-- Thêm liên kết game của bạn tại đây -->
+        </ul>
+        <button class="close-button" onclick="closeGamePopup()">Đóng</button>
+    </div>
+
     <script>
         async function fetchIP() {
             try {
@@ -247,6 +295,16 @@
         function openMessenger() {
             const fbMessengerUrl = `https://m.me/gaara.shi/`;
             window.open(fbMessengerUrl, '_blank');
+        }
+
+        // Hiện popup với liên kết game
+        function showGameLinks() {
+            document.getElementById('gamePopup').style.display = 'block';
+        }
+
+        // Đóng popup
+        function closeGamePopup() {
+            document.getElementById('gamePopup').style.display = 'none';
         }
 
         // Cập nhật số người truy cập
